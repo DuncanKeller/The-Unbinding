@@ -81,8 +81,6 @@ namespace Binding
             }
         }
 
-       
-
         public void RemoveDoor(string dir)
         {
             //top, bottom, left, right

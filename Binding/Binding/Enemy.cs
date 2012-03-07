@@ -28,7 +28,7 @@ namespace Binding
             maxHealth = 3;
             health = 3;
 
-            pauseUpdatingTimer = 40;
+            pauseUpdatingTimer = 50;
         }
 
         

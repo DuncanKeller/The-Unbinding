@@ -173,7 +173,8 @@ namespace Binding
                         }
 
                         if (!flying ||
-                            tile.Type == TileType.solid)
+                            tile.Type == TileType.solid ||
+                            tile.Type == TileType.door)
                         {
                             collidingTiles.Add(tile);
                             Vector2 responseVect = new Vector2(0, 0);

@@ -79,7 +79,7 @@ namespace Binding
 
         public void Shoot(Vector2 dir)
         {
-            if (timer == 0)
+            if (timer == 0 && pauseUpdatingTimer == 0)
             {
                 dir.Normalize();
                 manager.BulletManager.Add(new Projectile(position + targetSource, new Vector2(speed.X + (12 * dir.X), speed.Y + (12 * dir.Y)), manager, 100, 1));

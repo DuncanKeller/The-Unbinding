@@ -50,6 +50,17 @@ namespace Binding
             get { return type; }
         }
 
+        public bool IsSolid()
+        {
+            if(type == TileType.solid ||
+                type == TileType.rock || 
+                type == TileType.door)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Draw(SpriteBatch sb)
         {
             switch (type)
