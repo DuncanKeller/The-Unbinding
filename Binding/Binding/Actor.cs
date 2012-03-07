@@ -19,6 +19,8 @@ namespace Binding
         protected float dadt;
 
         Room currRoom;
+        protected int pauseUpdatingTimer = 0;
+         
 
         private List<Tile> collidingTiles = new List<Tile>();
 
@@ -82,40 +84,48 @@ namespace Binding
 
         public override void Update()
         {
-
-            if (speed.X > maxSpeed)
+            if (pauseUpdatingTimer == 0)
             {
-                speed.X = maxSpeed;
-            }
-            if (speed.X < -maxSpeed)
-            {
-                speed.X = -maxSpeed;
-            }
-
-            if (speed.Y > maxSpeed)
-            {
-                speed.Y = maxSpeed;
-            }
-            if (speed.Y < -maxSpeed)
-            {
-                speed.Y = -maxSpeed;
-            }
-
-            if (!(this is Player))
-            {
-                if (Math.Abs(speed.X) > 0)
+                if (speed.X > maxSpeed)
                 {
-                    speed.X /= dadt;
+                    speed.X = maxSpeed;
                 }
-                if (Math.Abs(speed.Y) > 0)
+                if (speed.X < -maxSpeed)
                 {
-                    speed.Y /= dadt;
+                    speed.X = -maxSpeed;
+                }
+
+                if (speed.Y > maxSpeed)
+                {
+                    speed.Y = maxSpeed;
+                }
+                if (speed.Y < -maxSpeed)
+                {
+                    speed.Y = -maxSpeed;
+                }
+
+                if (!(this is Player))
+                {
+                    if (Math.Abs(speed.X) > 0)
+                    {
+                        speed.X /= dadt;
+                    }
+                    if (Math.Abs(speed.Y) > 0)
+                    {
+                        speed.Y /= dadt;
+                    }
+                }
+
+                position.X += speed.X;
+                position.Y += speed.Y;
+            }
+            else
+            {
+                if (pauseUpdatingTimer > 0)
+                {
+                    pauseUpdatingTimer--;
                 }
             }
-
-            position.X += speed.X;
-            position.Y += speed.Y;
-
         }
 
         public bool CollidingTileDir(Vector2 dir)

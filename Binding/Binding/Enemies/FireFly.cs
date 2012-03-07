@@ -59,13 +59,13 @@ namespace Binding
         public override void Die()
         {
             manager.BulletManager.Add(new Projectile(position,
-                new Vector2(15, 0), manager, 800, 1));
+                new Vector2(12, 0), manager, 800, 1));
             manager.BulletManager.Add(new Projectile(position,
-                new Vector2(-15, 0), manager, 800, 1));
+                new Vector2(-12, 0), manager, 800, 1));
             manager.BulletManager.Add(new Projectile(position,
-                new Vector2(0, 15), manager, 800, 1));
+                new Vector2(0, 12), manager, 800, 1));
             manager.BulletManager.Add(new Projectile(position,
-                new Vector2(0, -15), manager, 800, 1));
+                new Vector2(0, -12), manager, 800, 1));
             base.Die();
         }
 
