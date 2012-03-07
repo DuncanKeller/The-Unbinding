@@ -1,0 +1,14 @@
+[Oo]bj
+[Bb]in
+*.user
+*.suo
+*.[Cc]ache
+*.bak
+*.ncb
+*.log 
+*.DS_Store
+
+
+Binding/Binding/Binding.csproj.Debug.cachefile
+Binding/Binding/Binding.csproj
+Binding/BindingContent/BindingContent.contentproj
