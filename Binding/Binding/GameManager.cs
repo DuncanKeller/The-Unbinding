@@ -36,6 +36,7 @@ namespace Binding
         public Vector2 CamDestination
         {
             get { return camDestination; }
+            set { camDestination = value; }
         }
 
         public Map Map
@@ -132,7 +133,6 @@ namespace Binding
         {
             List<Entity> toDispose = new List<Entity>();
             
-
             foreach (Player p in players)
             {
                  p.Update();
@@ -142,9 +142,18 @@ namespace Binding
             bulletManager.Update(map.SolidTiles, actorManager.Items, players);
             actorManager.Update(map.SolidTiles, actorManager.Items, players);
 
-            if (map.NumEnemies == 0)
+            if (map.NumEnemies == 0
+                && map.CurrentRoom.Compelted == false)
             {
                 map.OpenDoors();
+                foreach (Player p in players)
+                {
+                    if (p.CurrentRoom == map.CurrentRoom)
+                    {
+                        p.ChargeItem();
+                    }
+                }
+                map.CurrentRoom.Compelted = true;
             }
 
             UpdateCamera();
@@ -152,8 +161,6 @@ namespace Binding
 
         public void Draw(SpriteBatch sb)
         {
-           
-
             map.Draw(sb);
 
             foreach (Player p in players)
@@ -163,7 +170,6 @@ namespace Binding
 
             bulletManager.Draw(sb);
             actorManager.Draw(sb);
-
         }
         
     }

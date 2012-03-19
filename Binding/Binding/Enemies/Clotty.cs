@@ -111,14 +111,17 @@ namespace Binding
 
         public virtual void Shoot(Vector2 dir)
         {
+            if (pauseUpdatingTimer == 0)
+            {
                 manager.BulletManager.Add(new Projectile(position,
-               new Vector2(15, 0), manager, 800, 1));
+               new Vector2(13, 0), manager, 800, 1));
                 manager.BulletManager.Add(new Projectile(position,
-                    new Vector2(-15, 0), manager, 800, 1));
+                    new Vector2(-13, 0), manager, 800, 1));
                 manager.BulletManager.Add(new Projectile(position,
-                    new Vector2(0, 15), manager, 800, 1));
+                    new Vector2(0, 13), manager, 800, 1));
                 manager.BulletManager.Add(new Projectile(position,
-                    new Vector2(0, -15), manager, 800, 1));
+                    new Vector2(0, -13), manager, 800, 1));
+            }
                 //shootingTimer = 100 - (10 * fireRate);
         }
 

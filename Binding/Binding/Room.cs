@@ -14,6 +14,7 @@ namespace Binding
 
         int xPos;
         int yPos;
+        bool completed = false;
 
         Tile[,] tiles;
 
@@ -24,6 +25,12 @@ namespace Binding
         public int YPos
         {
             get { return yPos; }
+        }
+
+        public bool Compelted
+        {
+            get { return completed; }
+            set { completed = value; }
         }
 
         public Room(Tile[,] t, int xOffset, int yOffset)

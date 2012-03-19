@@ -23,6 +23,14 @@ namespace Binding
         Random rand;
         GameManager manager;
 
+        public Room[,] Rooms
+        {
+            get
+            {
+                return rooms;
+            }
+        }
+
 
         public Room CurrentRoom
         {
@@ -113,21 +121,24 @@ namespace Binding
                 {
                     if (rooms[x, y] != null)
                     {
-                        if (RoomExists(x - 1, y))
+                        if (!rooms[x, y].Compelted)
                         {
-                            rooms[x, y].AddDoor("left");
-                        }
-                        if (RoomExists(x + 1, y))
-                        {
-                            rooms[x, y].AddDoor("right");
-                        }
-                        if (RoomExists(x, y - 1))
-                        {
-                            rooms[x, y].AddDoor("top");
-                        }
-                        if (RoomExists(x, y + 1))
-                        {
-                            rooms[x, y].AddDoor("bottom");
+                            if (RoomExists(x - 1, y))
+                            {
+                                rooms[x, y].AddDoor("left");
+                            }
+                            if (RoomExists(x + 1, y))
+                            {
+                                rooms[x, y].AddDoor("right");
+                            }
+                            if (RoomExists(x, y - 1))
+                            {
+                                rooms[x, y].AddDoor("top");
+                            }
+                            if (RoomExists(x, y + 1))
+                            {
+                                rooms[x, y].AddDoor("bottom");
+                            }
                         }
                     }
                 }
@@ -242,37 +253,37 @@ namespace Binding
                         else if (line[x] == 'a')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new Fly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new Fly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'b')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new AggressiveFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new AggressiveFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'c')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new DoubleFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new DoubleFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'd')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new ShootingFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new ShootingFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'e')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new FireFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new FireFly(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'f')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new Horf(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT)), 
+                            enemies.Add(new Horf(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)), 
                                 manager));
                         }
                         else if (line[x] == 'g')
@@ -284,13 +295,13 @@ namespace Binding
                         else if (line[x] == 'h')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new HeadlessZombie(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new HeadlessZombie(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'i')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new Jumper(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new Jumper(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'j')
@@ -302,13 +313,13 @@ namespace Binding
                         else if (line[x] == 'k')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new Clotty(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new Clotty(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT)),
                                 manager));
                         }
                         else if (line[x] == 'l')
                         {
                             tile = new Tile(x * Tile.WIDTH, heightIndex * Tile.HEIGHT, TileType.background);
-                            enemies.Add(new Gish(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH), ((heightIndex + 1) * Tile.HEIGHT) + (Tile.HEIGHT)),
+                            enemies.Add(new Gish(new Vector2((x * Tile.WIDTH) + (Tile.WIDTH / 2), ((heightIndex + 1) * Tile.HEIGHT) ),
                                 manager));
                         }
                         else if (line[x] == 'm')

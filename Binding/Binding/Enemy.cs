@@ -31,8 +31,6 @@ namespace Binding
             pauseUpdatingTimer = 50;
         }
 
-        
-
         public override void Die()
         {
             //TODO play anim

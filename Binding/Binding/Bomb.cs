@@ -9,6 +9,8 @@ namespace Binding
 {
     class Bomb : Actor
     {
+        public const int WIDTH = 40;
+        public const int HEIGHT = 40;
         Player spawningPlayer;
         int timer;
         int maxTimer = 125;
@@ -26,8 +28,8 @@ namespace Binding
             spawningPlayer = sp;
             exploding = false;
             radius = 75;
-            width = 40;
-            height = 40;
+            width = WIDTH;
+            height = HEIGHT;
             ignorePlayerMovement = true;
         }
 

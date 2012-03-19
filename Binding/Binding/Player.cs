@@ -12,6 +12,8 @@ namespace Binding
     {
         KeyboardState keyState;
         KeyboardState oldKeyState;
+        SpacebarItem sbItem;
+
         int bombs = 10;
         int keys = 3;
 
@@ -25,6 +27,8 @@ namespace Binding
             health = maxHealth;
             targetSource = new Vector2(0, 10);
             CurrentRoom = manager.Map.CurrentRoom;
+
+            sbItem = new Binding.Items.AnarchistCookbook(this, manager);
         }
 
         public override Rectangle GetRect()
@@ -39,6 +43,18 @@ namespace Binding
                     width, height);
         }
 
+        public void RoomWarp(int x, int y)
+        {
+            manager.Map.CurrentRoom = manager.Map.Rooms[x, y];
+            manager.Cam.pos.X = (800 * x) + 400;
+            manager.Cam.pos.Y = (480 * y) + 240 - 60;
+            manager.CamDestination = new Vector2(
+                manager.Cam.pos.X,
+                manager.Cam.pos.Y);
+            position.X = (800 * x) + 400;
+            position.Y = (480 * y) + Tile.HEIGHT + 15;
+            manager.Map.GenerateDoors();
+        }
 
         public void UpdateCamera()
         {
@@ -185,6 +201,19 @@ namespace Binding
                 }
             }
 
+            if (keyState.IsKeyDown(Keys.Space) &&
+                oldKeyState.IsKeyUp(Keys.Space))
+            {
+                if (sbItem != null)
+                {
+                    if (sbItem.IsCharged)
+                    {
+                         sbItem.Activate();
+                         sbItem.DrainCharge();
+                    }
+                }
+            }
+
             UpdateCamera();
 
             oldKeyState = keyState;
@@ -203,6 +232,14 @@ namespace Binding
                     manager.ActorManager.Remove(actor);
                     keys++;
                 }
+            }
+        }
+
+        public void ChargeItem()
+        {
+            if(sbItem != null)
+            {
+                sbItem.Charge();
             }
         }
 

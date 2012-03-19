@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Binding
 {
-    class Horf : Enemy, ITouchDamage, IShooting, IFlying
+    class Horf : Enemy, ITouchDamage, IShooting
     {
         Random rand;
         int sightRange;
